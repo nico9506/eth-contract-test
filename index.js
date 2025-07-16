@@ -1,13 +1,19 @@
 require("dotenv").config();
 const ethers = require("ethers");
 
-const SMART_CONTRACT_ADDRESS = "0x5F91eCd82b662D645b15Fd7D2e20E5e5701CCB7A";
+const SMART_CONTRACT_ADDRESS = "0xE403d93458344a8C6dA03588282BE3Bedd78c436";
 
 const contractABI = [
   {
     inputs: [],
     name: "count",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
     stateMutability: "view",
     type: "function",
   },
@@ -21,7 +27,13 @@ const contractABI = [
   {
     inputs: [],
     name: "get",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
     stateMutability: "view",
     type: "function",
   },
@@ -33,7 +45,10 @@ const contractABI = [
     type: "function",
   },
 ];
-const provider = new ethers.AlchemyProvider("goerli", process.env.TEST_API_KEY);
+const provider = new ethers.AlchemyProvider(
+  "sepolia",
+  process.env.TEST_API_KEY,
+);
 
 async function main() {
   const counterContract = new ethers.Contract(
@@ -43,7 +58,6 @@ async function main() {
   );
 
   const currentCounterValue = await counterContract.get();
-
   console.log(currentCounterValue.toString());
 }
 
